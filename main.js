@@ -3071,87 +3071,102 @@ const data = [{
 
 
 
-const tbodyElement = document.querySelector("#content-tbody")
-const inputElement = document.querySelector(".content-input")
-const formElement = document.querySelector(".content-form")
-const btnElement = document.querySelector(".content-btn")
 
+
+const formElement = document.querySelector(".content-form")
+const inputElement = document.querySelector(".content-input")
+const tBodyElement = document.querySelector("#content-tbody")
 
 formElement.addEventListener("submit", event => {
     event.preventDefault()
 
     function search(name) {
         name = inputElement.value
-
         for (let item of data) {
-            for (let viloyat of item["Children"]["Area"]) {
-               
 
+            for( let tuman of item["Children"]["Area"]){
+                if((tuman["ShortName"].toLowerCase().includes(name.toLowerCase()) ) || (tuman["Name"].toLowerCase().includes(name.toLowerCase()) )) {
+                
+
+                   const trElement = document.createElement("tr")
+                const newIdElement = document.createElement("td")
+                const newNameElement = document.createElement("td")
+                const newShortName = document.createElement("td")
+                const newAreaName = document.createElement("td")
+                const newCodeElement = document.createElement("td")
+                const pFirstElement = document.createElement("p")
+                const pSecondElement = document.createElement("p")
+                const pThirdElement = document.createElement("p")
+
+                newIdElement.textContent = tuman["Id"]
+                newNameElement.textContent = tuman["Name"]
+                newShortName.textContent = tuman["ShortName"]
+                newCodeElement.textContent = tuman["Code"]
+                pFirstElement.textContent = tuman["AreaName"]["uz"]
+                pSecondElement.textContent = tuman["AreaName"]["en"]
+                pThirdElement.textContent = tuman["AreaName"]["ru"]
+
+                newAreaName.appendChild(pFirstElement)
+                newAreaName.appendChild(pSecondElement)
+                newAreaName.appendChild(pThirdElement)
+
+
+                trElement.appendChild(newIdElement)
+                trElement.appendChild(newNameElement)
+                trElement.appendChild(newShortName)
+                trElement.appendChild(newAreaName)
+                trElement.appendChild(newCodeElement)
+
+                tBodyElement.prepend(trElement) 
+                      
+                }
             }
+ 
 
-            if (item["ShortName"].toLowerCase().includes(name.toLowerCase())  || item["Name"].toLowerCase().includes(name.toLowerCase() ) ){
 
-                newTrElement = document.createElement('tr')
-                newTdIdElement = document.createElement("td")
-                newTdNameElement = document.createElement("td")
-                newTdShortNameElement = document.createElement("td")
-                newTdAreaNameElement = document.createElement("td")
-                newTdCodeElement = document.createElement("td")
+            if ((item["ShortName"].toLowerCase().includes(name.toLowerCase())) || (item["Name"].toLowerCase().includes(name.toLowerCase()))) {
+           
+                
 
-                newTdIdElement.textContent = item["Id"]
-                newTdNameElement.textContent = item["Name"]
-                newTdShortNameElement.textContent = item["ShortName"]
-                newTdAreaNameElement.textContent = item["AreaName"]["uz"]
-                newTdAreaNameElement.textContent = item["AreaName"]["ru"]
-                newTdAreaNameElement.textContent = item["AreaName"]["en"]
-                newTdCodeElement.textContent = item["Code"]
+                const trElement = document.createElement("tr")
+                const newIdElement = document.createElement("td")
+                const newNameElement = document.createElement("td")
+                const newShortName = document.createElement("td")
+                const newAreaName = document.createElement("td")
+                const newCodeElement = document.createElement("td")
+                const pFirstElement = document.createElement("p")
+                const pSecondElement = document.createElement("p")
+                const pThirdElement = document.createElement("p")
 
-                newTrElement.appendChild(newTdNameElement)
+                newIdElement.textContent = item["Id"]
+                newNameElement.textContent = item["Name"]
+                newShortName.textContent = item["ShortName"]
+                newCodeElement.textContent = item["Code"]
+                pFirstElement.textContent = item["AreaName"]["uz"]
+                pSecondElement.textContent = item["AreaName"]["en"]
+                pThirdElement.textContent = item["AreaName"]["ru"]
 
-                newTrElement.appendChild(newTdAreaNameElement)
+                newAreaName.appendChild(pFirstElement)
+                newAreaName.appendChild(pSecondElement)
+                newAreaName.appendChild(pThirdElement)
 
-                newTrElement.appendChild(newTdShortNameElement)
 
-                newTrElement.appendChild(newTdIdElement)
-                newTrElement.appendChild(newTdCodeElement)
+                trElement.appendChild(newIdElement)
+                trElement.appendChild(newNameElement)
+                trElement.appendChild(newShortName)
+                trElement.appendChild(newAreaName)
+                trElement.appendChild(newCodeElement)
 
-                tbodyElement.prepend(newTrElement)
+                tBodyElement.prepend(trElement) 
+                 
+           
 
-        }
-        }
+            }  
 
-        if (viloyat["ShortName"].toLowerCase().includes(name.toLowerCase())  || item["Name"].toLowerCase().includes(name.toLowerCase() ) ){
             
-            newTrElement = document.createElement('tr')
-            newTdIdElement = document.createElement("td")
-            newTdNameElement = document.createElement("td")
-            newTdShortNameElement = document.createElement("td")
-            newTdAreaNameElement = document.createElement("td")
-            newTdCodeElement = document.createElement("td")
-
-            newTdIdElement.textContent = item["Id"]
-            newTdNameElement.textContent = item["Name"]
-            newTdShortNameElement.textContent = item["ShortName"]
-            newTdAreaNameElement.textContent = item["AreaName"]["uz"]
-            newTdAreaNameElement.textContent = item["AreaName"]["ru"]
-            newTdAreaNameElement.textContent = item["AreaName"]["en"]
-            newTdCodeElement.textContent = item["Code"]
-
-            newTrElement.appendChild(newTdNameElement)
-
-            newTrElement.appendChild(newTdAreaNameElement)
-
-            newTrElement.appendChild(newTdShortNameElement)
-
-            newTrElement.appendChild(newTdIdElement)
-            newTrElement.appendChild(newTdCodeElement)
-
-            tbodyElement.prepend(newTrElement)
-
 
         }
-
     }
-    search()
-})
 
+    search()
+} )
