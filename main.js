@@ -3084,11 +3084,11 @@ formElement.addEventListener("submit", event => {
         name = inputElement.value
         for (let item of data) {
 
-            for( let tuman of item["Children"]["Area"]){
-                if((tuman["ShortName"].toLowerCase().includes(name.toLowerCase()) ) || (tuman["Name"].toLowerCase().includes(name.toLowerCase()) )) {
+            for( let viloyat of item["Children"]["Area"]){
+                if((viloyat["ShortName"].toLowerCase().includes(name.toLowerCase()) ) || (viloyat["Name"].toLowerCase().includes(name.toLowerCase()) )) {
                 
 
-                   const trElement = document.createElement("tr")
+                const trElement = document.createElement("tr")
                 const newIdElement = document.createElement("td")
                 const newNameElement = document.createElement("td")
                 const newShortName = document.createElement("td")
@@ -3098,13 +3098,13 @@ formElement.addEventListener("submit", event => {
                 const pSecondElement = document.createElement("p")
                 const pThirdElement = document.createElement("p")
 
-                newIdElement.textContent = tuman["Id"]
-                newNameElement.textContent = tuman["Name"]
-                newShortName.textContent = tuman["ShortName"]
-                newCodeElement.textContent = tuman["Code"]
-                pFirstElement.textContent = tuman["AreaName"]["uz"]
-                pSecondElement.textContent = tuman["AreaName"]["en"]
-                pThirdElement.textContent = tuman["AreaName"]["ru"]
+                newIdElement.textContent = viloyat["Id"]
+                newNameElement.textContent = viloyat["Name"]
+                newShortName.textContent = viloyat["ShortName"]
+                newCodeElement.textContent = viloyat["Code"]
+                pFirstElement.textContent = viloyat["AreaName"]["uz"]
+                pSecondElement.textContent = viloyat["AreaName"]["en"]
+                pThirdElement.textContent = viloyat["AreaName"]["ru"]
 
                 newAreaName.appendChild(pFirstElement)
                 newAreaName.appendChild(pSecondElement)
@@ -3125,8 +3125,7 @@ formElement.addEventListener("submit", event => {
 
 
             if ((item["ShortName"].toLowerCase().includes(name.toLowerCase())) || (item["Name"].toLowerCase().includes(name.toLowerCase()))) {
-           
-                
+
 
                 const trElement = document.createElement("tr")
                 const newIdElement = document.createElement("td")
@@ -3137,7 +3136,6 @@ formElement.addEventListener("submit", event => {
                 const pFirstElement = document.createElement("p")
                 const pSecondElement = document.createElement("p")
                 const pThirdElement = document.createElement("p")
-
                 newIdElement.textContent = item["Id"]
                 newNameElement.textContent = item["Name"]
                 newShortName.textContent = item["ShortName"]
@@ -3158,13 +3156,8 @@ formElement.addEventListener("submit", event => {
                 trElement.appendChild(newCodeElement)
 
                 tBodyElement.prepend(trElement) 
-                 
-           
 
             }  
-
-            
-
         }
     }
 
