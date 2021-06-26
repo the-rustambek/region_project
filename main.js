@@ -3068,63 +3068,126 @@ const data = [{
 
 
 
+// **********************************************************************************
 
 
 
+// const formElement = document.querySelector(".content-form")
+// const inputElement = document.querySelector(".content-input")
+// const tBodyElement = document.querySelector("#content-tbody")
+
+// formElement.addEventListener("submit", event => {
+//     event.preventDefault()
+
+//     function search(name) {
+//         name = inputElement.value
+//         for (let item of data) {
+
+//             for( let viloyat of item["Children"]["Area"]){
+//                 if((viloyat["ShortName"].toLowerCase().includes(name.toLowerCase()) ) || (viloyat["Name"].toLowerCase().includes(name.toLowerCase()) )) {
+                
+
+//                 const trElement = document.createElement("tr")
+//                 const newIdElement = document.createElement("td")
+//                 const newNameElement = document.createElement("td")
+//                 const newShortName = document.createElement("td")
+//                 const newAreaName = document.createElement("td")
+//                 const newCodeElement = document.createElement("td")
+//                 const pFirstElement = document.createElement("p")
+//                 const pSecondElement = document.createElement("p")
+//                 const pThirdElement = document.createElement("p")
+
+//                 newIdElement.textContent = viloyat["Id"]
+//                 newNameElement.textContent = viloyat["Name"]
+//                 newShortName.textContent = viloyat["ShortName"]
+//                 newCodeElement.textContent = viloyat["Code"]
+//                 pFirstElement.textContent = viloyat["AreaName"]["uz"]
+//                 pSecondElement.textContent = viloyat["AreaName"]["en"]
+//                 pThirdElement.textContent = viloyat["AreaName"]["ru"]
+
+//                 newAreaName.appendChild(pFirstElement)
+//                 newAreaName.appendChild(pSecondElement)
+//                 newAreaName.appendChild(pThirdElement)
+
+
+//                 trElement.appendChild(newIdElement)
+//                 trElement.appendChild(newNameElement)
+//                 trElement.appendChild(newShortName)
+//                 trElement.appendChild(newAreaName)
+//                 trElement.appendChild(newCodeElement)
+
+//                 tBodyElement.prepend(trElement) 
+                      
+//                 }
+//             }
+ 
+
+
+//             if ((item["ShortName"].toLowerCase().includes(name.toLowerCase())) || (item["Name"].toLowerCase().includes(name.toLowerCase()))) {
+
+
+//                 const trElement = document.createElement("tr")
+//                 const newIdElement = document.createElement("td")
+//                 const newNameElement = document.createElement("td")
+//                 const newShortName = document.createElement("td")
+//                 const newAreaName = document.createElement("td")
+//                 const newCodeElement = document.createElement("td")
+//                 const pFirstElement = document.createElement("p")
+//                 const pSecondElement = document.createElement("p")
+//                 const pThirdElement = document.createElement("p")
+//                 newIdElement.textContent = item["Id"]
+//                 newNameElement.textContent = item["Name"]
+//                 newShortName.textContent = item["ShortName"]
+//                 newCodeElement.textContent = item["Code"]
+//                 pFirstElement.textContent = item["AreaName"]["uz"]
+//                 pSecondElement.textContent = item["AreaName"]["en"]
+//                 pThirdElement.textContent = item["AreaName"]["ru"]
+
+//                 newAreaName.appendChild(pFirstElement)
+//                 newAreaName.appendChild(pSecondElement)
+//                 newAreaName.appendChild(pThirdElement)
+
+
+//                 trElement.appendChild(newIdElement)
+//                 trElement.appendChild(newNameElement)
+//                 trElement.appendChild(newShortName)
+//                 trElement.appendChild(newAreaName)
+//                 trElement.appendChild(newCodeElement)
+
+//                 tBodyElement.prepend(trElement) 
+
+//             }  
+//         }
+//     }
+
+//     search()
+// } )
+
+
+// **********************************************************************************
 
 
 const formElement = document.querySelector(".content-form")
 const inputElement = document.querySelector(".content-input")
 const tBodyElement = document.querySelector("#content-tbody")
 
-formElement.addEventListener("submit", event => {
-    event.preventDefault()
+let tumanlar = []
 
-    function search(name) {
-        name = inputElement.value
-        for (let item of data) {
+for (let item of data){
+    for(let tuman of item.Children.Area){
+        tumanlar.push({
+            ...tuman,
+            parent: item
+        })
+    }
+}
 
-            for( let viloyat of item["Children"]["Area"]){
-                if((viloyat["ShortName"].toLowerCase().includes(name.toLowerCase()) ) || (viloyat["Name"].toLowerCase().includes(name.toLowerCase()) )) {
-                
+// console.log(tumanlar)
 
-                const trElement = document.createElement("tr")
-                const newIdElement = document.createElement("td")
-                const newNameElement = document.createElement("td")
-                const newShortName = document.createElement("td")
-                const newAreaName = document.createElement("td")
-                const newCodeElement = document.createElement("td")
-                const pFirstElement = document.createElement("p")
-                const pSecondElement = document.createElement("p")
-                const pThirdElement = document.createElement("p")
-
-                newIdElement.textContent = viloyat["Id"]
-                newNameElement.textContent = viloyat["Name"]
-                newShortName.textContent = viloyat["ShortName"]
-                newCodeElement.textContent = viloyat["Code"]
-                pFirstElement.textContent = viloyat["AreaName"]["uz"]
-                pSecondElement.textContent = viloyat["AreaName"]["en"]
-                pThirdElement.textContent = viloyat["AreaName"]["ru"]
-
-                newAreaName.appendChild(pFirstElement)
-                newAreaName.appendChild(pSecondElement)
-                newAreaName.appendChild(pThirdElement)
-
-
-                trElement.appendChild(newIdElement)
-                trElement.appendChild(newNameElement)
-                trElement.appendChild(newShortName)
-                trElement.appendChild(newAreaName)
-                trElement.appendChild(newCodeElement)
-
-                tBodyElement.prepend(trElement) 
-                      
-                }
-            }
- 
-
-
-            if ((item["ShortName"].toLowerCase().includes(name.toLowerCase())) || (item["Name"].toLowerCase().includes(name.toLowerCase()))) {
+function findTuman(text){
+    text= text.toLowerCase()
+    return tumanlar.filter(tuman =>{
+        if(tuman.Name.toLowerCase().includes(text) || tuman["AreaName"]["uz"].toLowerCase().includes(text) || tuman["AreaName"]["ru"].toLowerCase().includes(text) || tuman["AreaName"]["en"].toLowerCase().includes(text) || tuman.ShortName.toLowerCase().includes(text)){
 
 
                 const trElement = document.createElement("tr")
@@ -3157,9 +3220,10 @@ formElement.addEventListener("submit", event => {
 
                 tBodyElement.prepend(trElement) 
 
-            }  
         }
-    }
+   
+    })
+    findTuman()
+}
 
-    search()
-} )
+// console.log(findTuman("kok"))
