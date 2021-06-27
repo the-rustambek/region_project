@@ -3123,8 +3123,7 @@ formElement.addEventListener("submit", event => {
  
 
 
-            if ((item["ShortName"].toLowerCase().includes(name.toLowerCase())) || (item["Name"].toLowerCase().includes(name.toLowerCase()))) {
-
+            if((item["ShortName"].toLowerCase().includes(name.toLowerCase()) ) || (item["Name"].toLowerCase().includes(name.toLowerCase()) || item["AreaName"]["uz"].toLowerCase().includes(name.toLowerCase()) || item["AreaName"]["ru"].toLowerCase().includes(name.toLowerCase()) || item["AreaName"]["en"].toLowerCase().includes(name.toLowerCase()) )) {
 
                 const trElement = document.createElement("tr")
                 const newIdElement = document.createElement("td")
